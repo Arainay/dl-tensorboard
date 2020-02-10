@@ -1,3 +1,4 @@
+import torch
 from torch.utils.data import DataLoader
 import torchvision
 import torchvision.transforms as transforms
@@ -54,3 +55,10 @@ def show_image(img, one_channel=False):
         plt.imshow(npimg, cmap='Greys')
     else:
         plt.imshow(transpose(npimg, (1, 2, 0)))
+
+
+def select_n_random(data, labels, n=100):
+    assert len(data) == len(labels)
+
+    perm = torch.randperm(len(data))
+    return data[perm][:n], labels[perm][:n]
